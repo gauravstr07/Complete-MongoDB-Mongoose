@@ -56,10 +56,37 @@ const createDocument = async () => {
       active: true,
     });
 
+    const javaPlaylist = new Playlist({
+      name: "Java",
+      ctype: "Back-End",
+      videos: 114,
+      author: "Code-With-Harry",
+      active: true,
+    });
+
+    const mySql = new Playlist({
+      name: "my-Sql",
+      ctype: "Database",
+      videos: 30,
+      author: "Greate-Learing",
+      active: true,
+    });
+
+    const nodejs = new Playlist({
+      name: "Node-Js",
+      ctype: "Back-End",
+      videos: 80,
+      author: "Thapatech",
+      active: true,
+    });
+
     const result = await Playlist.insertMany([
       reactPlaylist,
       jsPlaylist,
       mongoDB,
+      javaPlaylist,
+      mySql,
+      nodejs,
     ]);
     console.log(result);
   } catch (error) {
@@ -67,3 +94,13 @@ const createDocument = async () => {
   }
 };
 //createDocument();
+
+const getDocument = async () => {
+  try {
+    const result = await Playlist.find({ ctype: "Back-End" });
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+getDocument();
