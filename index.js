@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/ttchanell", {
+  .connect("mongodb://localhost:27017/ttchannel", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -12,7 +12,7 @@ mongoose
     console.log(err);
   });
 
-const playlistSchema = mongoose.Schema({
+const playListSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -27,23 +27,4 @@ const playlistSchema = mongoose.Schema({
   },
 });
 
-const Playlist = new mongoose.model("Playlist", playlistSchema);
-
-// ------------------------------------------ > Create Document
-const createDocument = async () => {
-  try {
-    const reactPlaylist = new Playlist({
-      name: "Node-Js",
-      ctype: "Back-End",
-      videos: 73,
-      author: "Gaurav-Sutar",
-      active: true,
-    });
-
-    const result = await reactPlaylist.save();
-    console.log(result);
-  } catch (error) {
-    console.log(error);
-  }
-};
-//createDocument();
+const Playlist = new mongoose.model("Playlist", playListSchema);
