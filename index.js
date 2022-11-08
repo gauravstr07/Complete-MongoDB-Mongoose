@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/ttchannel", {
+  .connect("mongodb://localhost:27017/ttchanell", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -12,7 +12,7 @@ mongoose
     console.log(err);
   });
 
-const playListSchema = new mongoose.Schema({
+const playlistSchema = mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -27,4 +27,43 @@ const playListSchema = new mongoose.Schema({
   },
 });
 
-const Playlist = new mongoose.model("Playlist", playListSchema);
+const Playlist = new mongoose.model("Playlist", playlistSchema);
+
+// ------------------------------------------ > Create Document
+const createDocument = async () => {
+  try {
+    const reactPlaylist = new Playlist({
+      name: "React-Js",
+      ctype: "Front-End",
+      videos: 80,
+      author: "Gaurav-Sutar",
+      active: true,
+    });
+
+    const jsPlaylist = new Playlist({
+      name: "Javascript",
+      ctype: "Front-End",
+      videos: 113,
+      author: "Gaurav-Sutar",
+      active: true,
+    });
+
+    const mongoDB = new Playlist({
+      name: "Mongo-Js",
+      ctype: "Database",
+      videos: 47,
+      author: "Gaurav-Sutar",
+      active: true,
+    });
+
+    const result = await Playlist.insertMany([
+      reactPlaylist,
+      jsPlaylist,
+      mongoDB,
+    ]);
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+createDocument();
